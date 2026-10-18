@@ -1,0 +1,5 @@
+# Dashboard-only dependencies (used by Streamlit Community Cloud, which reads this file
+# before the root requirements.txt). The dashboard reads outputs/ and needs no Spark.
+streamlit==1.66.0
+plotly==7.1.0
+pandas==2.2.3
