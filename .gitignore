@@ -1,0 +1,52 @@
+﻿# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# --- Node (only needed to rebuild the report / slides) ---
+node_modules/
+package.json
+package-lock.json
+
+# --- Report, slides and their build scripts (kept locally, submitted separately) ---
+docs/
+outputs/screenshots/
+
+# --- Old single-notebook version (superseded by the pipeline; contains error output and local paths) ---
+amazon_review_analytics.ipynb
+
+# --- Dataset and generated data (too big for GitHub; downloaded / rebuilt by the pipeline) ---
+data/
+*.jsonl
+*.jsonl.gz
+*.parquet
+*.crc
+spark-warehouse/
+metastore_db/
+derby.log
+checkpoint/
+
+# --- Logs and run artefacts ---
+*.log
+nohup.out
+
+# --- Secrets / local environment files ---
+.env
+.env.*
+*.pem
+*.key
+
+# --- Office lock/temp files (created while a document is open) ---
+~$*
+*.tmp
+
+# --- Editor / OS settings ---
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk

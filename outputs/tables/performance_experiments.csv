@@ -1,0 +1,11 @@
+experiment,setup,seconds
+Storage format,JSON Lines (raw),3.41
+Storage format,"Parquet (columnar, compressed)",0.301
+Partition pruning,JSON - filter by year (full scan),2.568
+Partition pruning,Parquet - partitionBy(year),0.127
+Column pruning,Parquet - avg(length(text)),0.473
+Column pruning,Parquet - avg(rating),0.175
+Caching,No cache (lineage recomputed from JSON),2.886
+Caching,cache() after cleaning,0.376
+Join strategy,Sort-merge join (shuffle both sides),0.757
+Join strategy,Broadcast hash join,0.456

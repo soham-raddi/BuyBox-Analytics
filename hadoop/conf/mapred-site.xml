@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<configuration>
+  <!-- 'local' runs MapReduce with the LocalJobRunner (no YARN daemons needed on a laptop).
+       run_hadoop.sh passes -D mapreduce.framework.name=yarn when YARN is running. -->
+  <property>
+    <name>mapreduce.framework.name</name>
+    <value>local</value>
+  </property>
+  <property>
+    <name>mapreduce.local.map.tasks.maximum</name>
+    <value>4</value>
+  </property>
+  <property>
+    <name>yarn.app.mapreduce.am.env</name>
+    <value>HADOOP_MAPRED_HOME=${env.HADOOP_HOME}</value>
+  </property>
+  <property>
+    <name>mapreduce.map.env</name>
+    <value>HADOOP_MAPRED_HOME=${env.HADOOP_HOME}</value>
+  </property>
+  <property>
+    <name>mapreduce.reduce.env</name>
+    <value>HADOOP_MAPRED_HOME=${env.HADOOP_HOME}</value>
+  </property>
+</configuration>

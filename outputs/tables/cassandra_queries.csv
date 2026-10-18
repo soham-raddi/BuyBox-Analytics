@@ -1,0 +1,10 @@
+query,cql,rows,ms
+"Top product by reviews (needs full scan - anti-pattern, run once)","SELECT parent_asin, n_reviews FROM reviewlens.product_summary",112496,3968.76
+Q1 product card,SELECT * FROM reviewlens.product_summary WHERE parent_asin=%s,1,6.07
+Q2 latest 5 reviews of product,"SELECT ts, rating, review_title FROM reviewlens.reviews_by_product WHERE parent_asin=%s LIMIT 5",5,7.14
+Q3 brand monthly trend (last 12 months),"SELECT month, reviews, avg_rating FROM reviewlens.brand_monthly WHERE brand=%s LIMIT 12",12,6.04
+Q4 product's 1-star reviews (ALLOW FILTERING inside one partition),"SELECT ts, review_title FROM reviewlens.reviews_by_product WHERE parent_asin=%s AND rating=1.0 ALLOW FILTERING",85,375.99
+CREATE test product,"INSERT INTO reviewlens.product_summary (parent_asin, product_title, brand, n_reviews, avg_rating) VALUES ('TEST0001', 'Demo product', 'DemoBrand', 1, 5.0)",0,4.15
+UPDATE test product,"UPDATE reviewlens.product_summary SET n_reviews=2, avg_rating=4.5 WHERE parent_asin='TEST0001'",0,3.26
+READ test product,SELECT * FROM reviewlens.product_summary WHERE parent_asin='TEST0001',1,2.17
+DELETE test product,DELETE FROM reviewlens.product_summary WHERE parent_asin='TEST0001',0,1.9

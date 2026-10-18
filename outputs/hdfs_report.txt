@@ -1,0 +1,65 @@
+### hdfs dfs -mkdir -p /reviewlens/raw
+### hdfs dfs -put (upload JSON Lines files)
+### hdfs dfs -ls -h /reviewlens/raw
+Found 2 items
+-rw-r--r--   1 soham supergroup    311.5 M 2026-10-18 14:56 /reviewlens/raw/All_Beauty.jsonl
+-rw-r--r--   1 soham supergroup    203.1 M 2026-10-18 14:57 /reviewlens/raw/meta_All_Beauty.jsonl
+### Replication factor, block size and size (hdfs dfs -stat)
+name=All_Beauty.jsonl replication=1 blocksize=67108864 bytes=326611506
+name=meta_All_Beauty.jsonl replication=1 blocksize=67108864 bytes=212990142
+### hdfs dfs -du -h
+175.7 M  175.7 M  /reviewlens/curated
+5.0 M    5.0 M    /reviewlens/mapreduce
+835.5 K  835.5 K  /reviewlens/models
+514.6 M  514.6 M  /reviewlens/raw
+### hdfs fsck (blocks and their locations)
+Connecting to namenode via http://localhost:9870/fsck?ugi=soham&files=1&blocks=1&path=%2Freviewlens%2Fraw%2FAll_Beauty.jsonl
+/reviewlens/raw/All_Beauty.jsonl 326611506 bytes, replicated: replication=1, 5 block(s):  OK
+0. BP-1415950693-127.0.1.1-1792332529000:blk_1073742038_1214 len=67108864 Live_repl=1
+1. BP-1415950693-127.0.1.1-1792332529000:blk_1073742039_1215 len=67108864 Live_repl=1
+2. BP-1415950693-127.0.1.1-1792332529000:blk_1073742040_1216 len=67108864 Live_repl=1
+3. BP-1415950693-127.0.1.1-1792332529000:blk_1073742041_1217 len=67108864 Live_repl=1
+4. BP-1415950693-127.0.1.1-1792332529000:blk_1073742042_1218 len=58176050 Live_repl=1
+Status: HEALTHY
+ Total dirs:			0
+ Total symlinks:		0
+ Total size:	326611506 B
+ Total files:	1
+ Total blocks (validated):	5 (avg. block size 65322301 B)
+ Minimally replicated blocks:	5 (100.0 %)
+ Over-replicated blocks:	0 (0.0 %)
+ Under-replicated blocks:	0 (0.0 %)
+ Mis-replicated blocks:		0 (0.0 %)
+ Missing blocks:		0
+ Corrupt blocks:		0
+ Total size:	0 B
+ Total files:	0
+### hdfs dfs -setrep (change replication factor; single node keeps 1 live copy)
+Replication 1 set: /reviewlens/raw/meta_All_Beauty.jsonl
+### hdfs dfs -tail (last KB of the file)
+aked a little from the top even though it was taped securely. Other than that I recommend this shampoo/conditioner.", "images": [], "asin": "B0093MXHFG", "parent_asin": "B0093MXHFG", "user_id": "AGIYQU6RK6TBKBCMWKVPBPBMMJNA", "timestamp": 1366944486000, "helpful_vote": 1, "verified_purchase": true}
+
+### hdfs dfs -get (download back to local disk) + checksum comparison
+local : 707b2e3364aaa2f6f8a8365ade20038a  -
+hdfs  : 707b2e3364aaa2f6f8a8365ade20038a  -
+### hdfs dfsadmin -report
+Configured Capacity: 1081101176832 (1006.85 GB)
+Present Capacity: 1021411840000 (951.26 GB)
+DFS Remaining: 1020675743744 (950.58 GB)
+DFS Used: 736096256 (702.00 MB)
+DFS Used%: 0.07%
+Replicated Blocks:
+	Under replicated blocks: 0
+	Blocks with corrupt replicas: 0
+	Missing blocks: 0
+	Missing blocks (with replication factor 1): 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+Erasure Coded Block Groups: 
+	Low redundancy block groups: 0
+	Block groups with corrupt internal blocks: 0
+	Missing block groups: 0
+	Low redundancy blocks with highest priority to recover: 0
+	Pending deletion blocks: 0
+
+-------------------------------------------------

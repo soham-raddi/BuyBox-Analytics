@@ -1,0 +1,6 @@
+cluster,log_reviews,avg_rating,std_rating,pct_negative,pct_verified,avg_len,avg_helpful,pct_with_photo,active_months,pct_recent,n_reviews,products,segment
+0,3.581,4.402,1.091,0.097,0.939,154.709,0.824,0.074,18.743,0.046,38.987,2600,Loved niche products
+1,3.585,3.288,1.627,0.376,0.934,161.578,1.011,0.069,16.718,0.048,39.783,1846,Problem products
+2,5.001,4.149,1.288,0.159,0.926,173.417,1.444,0.048,49.28,0.077,192.78,783,Established best-sellers
+3,3.554,4.181,1.135,0.128,0.446,384.18,1.344,0.144,14.163,0.188,40.113,406,"Low-verified, long reviews"
+4,3.752,3.89,1.423,0.23,0.933,173.707,1.387,0.112,16.24,0.763,55.336,321,New & trending

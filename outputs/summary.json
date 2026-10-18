@@ -1,0 +1,197 @@
+{
+  "ingest": {
+    "category": "All_Beauty",
+    "raw_reviews": 701528,
+    "clean_reviews": 693547,
+    "removed_rows": 7981,
+    "products_in_metadata": 112590,
+    "corrupt_metadata_rows": 0,
+    "reviewed_products": 112496,
+    "users": 631352,
+    "first_year": 2000,
+    "last_year": 2023,
+    "raw_mb": 539.6,
+    "parquet_mb": 184.2,
+    "quality": {
+      "null_text": 0,
+      "empty_text": 720,
+      "null_rating": 0,
+      "with_images": 59684
+    }
+  },
+  "run": {
+    "spark_version": "3.5.3",
+    "master": "local[*]",
+    "step_seconds": {
+      "ingest": 57.8,
+      "analytics": 23.6,
+      "sentiment": 92.0,
+      "graph": 65.2,
+      "streaming": 83.4,
+      "nosql": 183.8,
+      "performance": 104.6
+    },
+    "finished": "2026-10-18 15:09"
+  },
+  "analytics": {
+    "total_reviews": 693547,
+    "pct_5_star": 59.98,
+    "pct_positive": 71.31,
+    "pct_negative": 20.669999999999998,
+    "avg_rating": 3.961,
+    "peak_month": "2021-03",
+    "peak_month_reviews": 13930,
+    "verified_avg_rating": 3.949,
+    "unverified_avg_rating": 4.075,
+    "helpful_votes_1_star": 0.964,
+    "helpful_votes_5_star": 0.957,
+    "top_complaint_words": [
+      "hair",
+      "work",
+      "money",
+      "good",
+      "time",
+      "color",
+      "waste",
+      "disappointed",
+      "quality",
+      "skin"
+    ],
+    "top_complaint_bigrams": [
+      "waste money",
+      "poor quality",
+      "worth money",
+      "nail polish",
+      "stopped working",
+      "human hair",
+      "save money",
+      "doesn work",
+      "waste time",
+      "didn work"
+    ],
+    "most_reviewed_product": "Salux Nylon Japanese Beauty Skin Bath Wash Cloth/towel (3) Blue Yellow",
+    "worst_popular_product": "Allnice Magnetic Eyelashes Dual Magnets False Eyelashes Reusable 3D No"
+  },
+  "sentiment": {
+    "training_reviews": 637851,
+    "models": [
+      {
+        "model": "Logistic Regression (TF-IDF uni+bigrams)",
+        "accuracy": 0.9524,
+        "f1_weighted": 0.9531,
+        "precision_negative": 0.8597,
+        "recall_negative": 0.9424,
+        "roc_auc": 0.9844,
+        "train_seconds": 67.5
+      },
+      {
+        "model": "Multinomial Naive Bayes (term counts)",
+        "accuracy": 0.9422,
+        "f1_weighted": 0.9435,
+        "precision_negative": 0.8258,
+        "recall_negative": 0.9426,
+        "roc_auc": 0.9803,
+        "train_seconds": 41.1
+      }
+    ],
+    "hidden_complaints": 581,
+    "five_star_test_reviews": 83054,
+    "hidden_complaint_pct": 0.7,
+    "positive_text_one_star": 223,
+    "one_star_test_reviews": 20215,
+    "top_negative_terms": [
+      "two stars",
+      "not good",
+      "one star",
+      "not",
+      "not great",
+      "not worth",
+      "disappointed",
+      "disappointing",
+      "not happy",
+      "not very"
+    ],
+    "top_positive_terms": [
+      "great",
+      "love",
+      "five stars",
+      "five",
+      "four stars",
+      "perfect",
+      "not bad",
+      "awesome",
+      "great product",
+      "excellent"
+    ]
+  },
+  "graph_segments": {
+    "graph_nodes": 2084,
+    "graph_edges": 3981,
+    "giant_component": 975,
+    "connected_components": 364,
+    "visualised_nodes": 239,
+    "communities_in_view": 5,
+    "top_pagerank_product": "MilyBest Fluffy Lashes False Eyelashes Natural Look Cat Eye Lashes, Dr",
+    "segmented_products": 5956,
+    "k": 5,
+    "silhouette": 0.358,
+    "pca_variance_2d": 0.461,
+    "segments": {
+      "0": "Loved niche products (2600 products)",
+      "1": "Problem products (1846 products)",
+      "2": "Established best-sellers (783 products)",
+      "3": "Low-verified, long reviews (406 products)",
+      "4": "New & trending (321 products)"
+    }
+  },
+  "streaming": {
+    "replayed_events": 38579,
+    "window_start": "2021-01-01",
+    "window_end": "2021-04-01",
+    "files": 39,
+    "micro_batches": 22,
+    "rows_seen_in_progress": 38579,
+    "wall_seconds": 73.4,
+    "avg_rows_per_sec": 576.5,
+    "products_flagged": 18,
+    "top_alert": "Magic Nail Polish Remover, Easily & Quickly Remove Nail Poli"
+  },
+  "nosql": {
+    "status": "ok",
+    "host": "127.0.0.1",
+    "keyspace": "reviewlens",
+    "loads": [
+      {
+        "table": "product_summary",
+        "rows": 112496,
+        "seconds": 24.3,
+        "rows_per_sec": 4636
+      },
+      {
+        "table": "reviews_by_product",
+        "rows": 693547,
+        "seconds": 103.9,
+        "rows_per_sec": 6677
+      },
+      {
+        "table": "brand_monthly",
+        "rows": 258365,
+        "seconds": 45.1,
+        "rows_per_sec": 5732
+      }
+    ],
+    "demo_product": "B085BB7B1M",
+    "demo_brand": "SALUX",
+    "single_partition_query_ms": 6.07
+  },
+  "performance": {
+    "parquet_vs_json_speedup": 11.3,
+    "partition_pruning_speedup": 20.2,
+    "column_pruning_speedup": 2.7,
+    "cache_speedup": 7.7,
+    "broadcast_join_speedup": 1.7,
+    "best_partitions": 8,
+    "single_partition_seconds": 15.214,
+    "best_partition_seconds": 5.029
+  }
+}

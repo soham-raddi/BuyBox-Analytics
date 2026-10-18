@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- Pseudo-distributed (single-node) Hadoop used by the BuyBox Analytics project. -->
+<configuration>
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://localhost:9000</value>
+  </property>
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value>${user.home}/hadoop-data/tmp</value>
+  </property>
+</configuration>
