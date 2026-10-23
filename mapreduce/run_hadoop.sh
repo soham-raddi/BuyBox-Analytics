@@ -20,7 +20,8 @@ run_job () {   # name mapper reducer combiner reducers
   local t0=$(date +%s)
   local combiner=()
   [ -n "$4" ] && combiner=(-combiner "$PY $4")
-  hadoop jar "$STREAMING_JAR" \
+  # INFO logging for the job itself: the counters summary below is read from this log
+  HADOOP_ROOT_LOGGER=INFO,console hadoop jar "$STREAMING_JAR" \
     -D mapreduce.framework.name="${MR_FRAMEWORK:-local}" \
     -D mapreduce.job.name="BuyBoxAnalytics-$name" \
     -D mapreduce.job.reduces="$5" \

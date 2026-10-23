@@ -53,11 +53,17 @@ bda mini project/
 Everything big-data runs in **WSL2 Ubuntu** (Linux). Spark and Hadoop on plain Windows need
 `winutils.exe`/`hadoop.dll`. The dashboard runs on Windows.
 
+* **Live demo from scratch:** follow [DEMO.md](DEMO.md). It formats HDFS and runs every stage step by step, with
+  `bash scripts/reset_demo.sh` to start clean.
+* **One launcher for everything:** double-click **`BuyBox_Analytics.bat`**. It has a menu for the live step-by-step
+  demo, the full pipeline, the HDFS and Spark demos (their web UIs open automatically), the dashboard and stopping
+  services.
+
 ### 1. One-time setup (inside WSL, no sudo needed)
 
 ```bash
 cd "/mnt/c/Users/Soham/Codes/random stuff/bda mini project"
-bash scripts/setup_wsl.sh      # JDK 17, Python venv + packages, Cassandra 5.0 (Hadoop 3.3 reused from C:\hadoop)
+bash scripts/setup_wsl.sh      # JDK 17, Python venv + packages, Hadoop 3.3, Cassandra 5.0 and the dataset
 ```
 
 ### 2. Run the whole project (inside WSL)

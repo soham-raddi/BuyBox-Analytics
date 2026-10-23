@@ -15,9 +15,9 @@ from .viz import BLUE, GREEN, ORANGE, PURPLE, RED, plt
 def timed(fn, repeats=3):
     best = float("inf")
     for _ in range(repeats):
-        t0 = time.time()
+        t0 = time.perf_counter()
         fn()
-        best = min(best, time.time() - t0)
+        best = min(best, time.perf_counter() - t0)
     return round(best, 3)
 
 

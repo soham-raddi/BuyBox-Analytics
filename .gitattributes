@@ -9,3 +9,6 @@
 *.docx binary
 *.pptx binary
 *.pdf  binary
+
+# Windows launchers need CRLF
+*.bat  text eol=crlf

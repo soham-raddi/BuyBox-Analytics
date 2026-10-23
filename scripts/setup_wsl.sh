@@ -25,14 +25,19 @@ fi
 CASS_VER=5.0.9
 if [ ! -x ~/opt/cassandra/bin/cassandra ]; then
   echo "Installing Apache Cassandra $CASS_VER ..."
-  curl -sSL -o /tmp/cassandra.tar.gz "https://dlcdn.apache.org/cassandra/$CASS_VER/apache-cassandra-$CASS_VER-bin.tar.gz"
+  # dlcdn only keeps the newest releases; fall back to the permanent Apache archive
+  curl -fsSL -o /tmp/cassandra.tar.gz "https://dlcdn.apache.org/cassandra/$CASS_VER/apache-cassandra-$CASS_VER-bin.tar.gz" ||
+    curl -fsSL -o /tmp/cassandra.tar.gz "https://archive.apache.org/dist/cassandra/$CASS_VER/apache-cassandra-$CASS_VER-bin.tar.gz"
   mkdir -p ~/opt/cassandra && tar -xzf /tmp/cassandra.tar.gz -C ~/opt/cassandra --strip-components=1 && rm /tmp/cassandra.tar.gz
 fi
 
-if [ ! -x "${HADOOP_HOME_LINUX:-/mnt/c/hadoop}/bin/hadoop" ]; then
-  echo "Hadoop not found at /mnt/c/hadoop - downloading Hadoop 3.3.6 to ~/opt/hadoop ..."
-  curl -sSL -o /tmp/hadoop.tar.gz "https://archive.apache.org/dist/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz"
+# Hadoop: reuse a Windows install at C:\hadoop if there is one, otherwise download 3.3.6 into ~/opt/hadoop
+# (scripts/env.sh looks in both places)
+if [ ! -x "${HADOOP_HOME_LINUX:-/mnt/c/hadoop}/bin/hadoop" ] && [ ! -x ~/opt/hadoop/bin/hadoop ]; then
+  echo "Installing Apache Hadoop 3.3.6 to ~/opt/hadoop (about 700 MB) ..."
+  curl -fsSL -o /tmp/hadoop.tar.gz "https://archive.apache.org/dist/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz"
   mkdir -p ~/opt/hadoop && tar -xzf /tmp/hadoop.tar.gz -C ~/opt/hadoop --strip-components=1 && rm /tmp/hadoop.tar.gz
-  echo 'export HADOOP_HOME_LINUX=$HOME/opt/hadoop' >> ~/.bashrc
 fi
-echo "Setup complete. Next:  source scripts/env.sh && bash run_all.sh"
+
+bash "$HERE/scripts/download_data.sh"
+echo "Setup complete. Next:  bash run_all.sh"

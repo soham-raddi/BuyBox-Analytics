@@ -49,6 +49,8 @@ def run(spark):
     months = int(os.environ.get("RL_STREAM_MONTHS", "3"))
     end = (pd.Timestamp(start) + pd.DateOffset(months=months)).to_pydatetime()
     batch_size = int(os.environ.get("RL_STREAM_BATCH", "1000"))
+    # Alert rule: >= 5 negatives in 7 days on the full data; scaled down when running on a sample (quick mode)
+    min_negatives = max(2, round(5 * float(os.environ.get("RL_SAMPLE", "1.0"))))
     for d in (IN_DIR, CKPT_DIR):
         shutil.rmtree(d, ignore_errors=True)
         d.mkdir(parents=True)
@@ -84,7 +86,7 @@ def run(spark):
                           "handler_ms": round(1000 * (time.time() - t0), 1)})
 
     def on_products(batch, batch_id):
-        hits = batch.filter("negatives >= 5 AND negatives / reviews >= 0.4").collect()
+        hits = batch.filter(f"negatives >= {min_negatives} AND negatives / reviews >= 0.4").collect()
         for r in hits:
             key = (r.parent_asin, r.w.start)
             state["alerts"][key] = {"window_start": r.w.start, "window_end": r.w.end, "parent_asin": r.parent_asin,

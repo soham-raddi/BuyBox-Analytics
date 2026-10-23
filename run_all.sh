@@ -7,6 +7,7 @@ set -euo pipefail
 source "$(dirname "$0")/scripts/env.sh"
 
 echo "##### 1. Start HDFS and load the raw data #####"
+bash scripts/download_data.sh          # no-op when data/raw already has the files
 bash scripts/start_hadoop.sh
 bash scripts/hdfs_load.sh
 

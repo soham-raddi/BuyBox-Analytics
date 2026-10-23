@@ -14,9 +14,6 @@ package-lock.json
 docs/
 outputs/screenshots/
 
-# --- Old single-notebook version (superseded by the pipeline; contains error output and local paths) ---
-amazon_review_analytics.ipynb
-
 # --- Dataset and generated data (too big for GitHub; downloaded / rebuilt by the pipeline) ---
 data/
 *.jsonl
